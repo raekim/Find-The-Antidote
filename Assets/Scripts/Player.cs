@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] int damage = 1;
     CameraMove playerCamera;
 
-
     private void Start()
     {
         playerCamera = GetComponent<CameraMove>();
@@ -113,7 +112,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
