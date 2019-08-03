@@ -7,6 +7,13 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject PlayerAttackEffect;
     [SerializeField] int health;
     [SerializeField] int damage = 1;
+    CameraMove playerCamera;
+
+
+    private void Start()
+    {
+        playerCamera = GetComponent<CameraMove>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,13 +46,13 @@ public class Player : MonoBehaviour
         if(newPosVector != transform.position)
         {
             ProcessMovingToNewPosition(newPosVector);
+            playerCamera.MoveCamera();
         }
         
     }
 
     private void ProcessMovingToNewPosition(Vector3 newPosVector)
     {
-        Debug.Log(newPosVector);
         // get the object that is in the way of the player
         GameObject objectInTheWay = GameManager.Instance.GetGameObjectAt(GameManager.Instance.MakeDictionaryKey(newPosVector.x, newPosVector.y));
         
