@@ -26,9 +26,7 @@ public class CameraMove : MonoBehaviour
     public void MoveCamera()
     {
         Vector3 targetObjectPos = camera.WorldToViewportPoint(gameObjectToFollow.transform.position);
-        Debug.Log(targetObjectPos);
-        
-        
+
         if(targetObjectPos.x < leftLimit - 0.1f)
         {
             camera.transform.position += (Vector3)Vector2.left;

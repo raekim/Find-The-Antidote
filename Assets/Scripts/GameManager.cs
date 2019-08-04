@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] int pixelsPerUnit;
+    [SerializeField] Text restartText;
     Dictionary<string, GameObject> GameObjectsDictionary = new Dictionary<string, GameObject>();
+    bool isGameOver = false;
 
     static GameManager _instance;
     static public GameManager Instance { get { return _instance; } }
@@ -20,6 +24,16 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+    }
+
+    void Start()
+    {
+        StartGame();
+    }
+
+    private void Update()
+    {
+        RestartGame();
     }
 
     public GameObject GetGameObjectAt(string keyString)
@@ -51,15 +65,37 @@ public class GameManager : MonoBehaviour
         return pixelsPerUnit;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
-        
+        restartText.gameObject.SetActive(false); ;
+    }
+    
+    public void GameOver()
+    {
+        StopAllCoroutines();
+        isGameOver = true;
+
+        // player dies
+        FindObjectOfType<Player>().Die();
+
+        // display "press (r) to restart" text
+        restartText.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    void RestartGame()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("R pressed");
+            if (!isGameOver)
+            {
+                FindObjectOfType<Player>().Die();
+                GameOver();
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            } 
+        }
     }
 }

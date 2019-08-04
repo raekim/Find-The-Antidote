@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
-            Die();
+            GameManager.Instance.GameOver();
         }
     }
 

@@ -29,7 +29,7 @@ public class DeathTimer : MonoBehaviour
         }
         // count-down over
         UpdateTimeText();
-        FindObjectOfType<Player>().GetComponent<Player>().Die();
+        GameManager.Instance.GameOver();
     }
 
     void UpdateTimeText()
