@@ -2017,7 +2017,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press (R) to restart
+  m_Text: 
 --- !u!222 &538937117
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2970,6 +2970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartText: {fileID: 538937116}
   winText: {fileID: 2426990}
+  winSound: {fileID: 8300000, guid: 513f03e2e74645748a833592a5142f84, type: 3}
 --- !u!4 &815987776
 Transform:
   m_ObjectHideFlags: 0

@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalLevel1.unity
     guid: 27adbb94b6811ee449b378552f210770
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel2.unity
+    guid: 9b1aec9afbffe144eafcfbe6f64d0f14
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel3.unity
+    guid: 98a8f1bb9afba6140813c5db1c2049e7
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel4.unity
+    guid: fba12dd5e70c2624badb97491e2e2667
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 5aecc7d06492079438ca80f62c71a5b5
   m_configObjects: {}

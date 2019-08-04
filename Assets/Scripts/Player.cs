@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] Sprite normalSprite;   // sprite of the character after taking the antidote
     [SerializeField] Text healthText;
     [SerializeField] bool isHealthStage;
+    [SerializeField] GameObject explosionEffect;
     CameraMove playerCamera;
 
     private void Start()
@@ -134,7 +135,8 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        Instantiate(explosionEffect, transform.position + new Vector3(0, 0, -1), Quaternion.identity);
+        Destroy(gameObject, 0.15f);
     }
 
     public void TakeAntidote()

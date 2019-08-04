@@ -1090,6 +1090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartText: {fileID: 538937116}
   winText: {fileID: 2426990}
+  winSound: {fileID: 8300000, guid: 513f03e2e74645748a833592a5142f84, type: 3}
 --- !u!4 &815987776
 Transform:
   m_ObjectHideFlags: 0
@@ -2482,32 +2483,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 5001243126374448848, guid: a4c359f55db7ef74cb57477b0058f809,
-        type: 3}
-      propertyPath: leftLimit
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5001243126374448848, guid: a4c359f55db7ef74cb57477b0058f809,
-        type: 3}
-      propertyPath: upLimit
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5001243126374448848, guid: a4c359f55db7ef74cb57477b0058f809,
-        type: 3}
-      propertyPath: downLimit
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8468962458945559546, guid: a4c359f55db7ef74cb57477b0058f809,
-        type: 3}
-      propertyPath: health
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8468962458945559546, guid: a4c359f55db7ef74cb57477b0058f809,
-        type: 3}
-      propertyPath: normalSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 09d670c362762424eb05618bf8437acc,
-        type: 3}
     - target: {fileID: 8468962458945559546, guid: a4c359f55db7ef74cb57477b0058f809,
         type: 3}
       propertyPath: healthText

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] Text restartText;
     [SerializeField] Text winText;
+    [SerializeField] AudioClip winSound;
     Dictionary<string, GameObject> GameObjectsDictionary = new Dictionary<string, GameObject>();
     bool isGameOver = false;
     bool isGameWon = false;
@@ -91,8 +92,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<Player>().TakeAntidote();
         winText.gameObject.SetActive(true);
         isGameWon = true;
-
-        
+        AudioSource.PlayClipAtPoint(winSound, Camera.main.transform.position);
     }
 
     void GoToNextStage()
