@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] int pixelsPerUnit;
     [SerializeField] Text restartText;
+    [SerializeField] Text winText;
     Dictionary<string, GameObject> GameObjectsDictionary = new Dictionary<string, GameObject>();
     bool isGameOver = false;
+    bool isGameWon = false;
 
     static GameManager _instance;
     static public GameManager Instance { get { return _instance; } }
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         RestartGame();
+        GoToNextStage();
     }
 
     public GameObject GetGameObjectAt(string keyString)
@@ -60,14 +62,9 @@ public class GameManager : MonoBehaviour
         return keyString;
     }
 
-    public int GetPixelsPerUnit()
-    {
-        return pixelsPerUnit;
-    }
-
     public void StartGame()
     {
-        restartText.gameObject.SetActive(false); ;
+        winText.gameObject.SetActive(false);
     }
     
     public void GameOver()
@@ -78,7 +75,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<Player>().Die();
 
         // display "press (r) to restart" text
-        restartText.gameObject.SetActive(true);
+        restartText.text = "Press (R) to restart";
     }
 
     private void StopGame()
@@ -92,11 +89,28 @@ public class GameManager : MonoBehaviour
     {
         StopGame();
         FindObjectOfType<Player>().TakeAntidote();
+        winText.gameObject.SetActive(true);
+        isGameWon = true;
+
+        
+    }
+
+    void GoToNextStage()
+    {
+        if (isGameWon)
+        {
+            // press enter to load the next scene
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                // load the next scene in build order
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
     }
 
     void RestartGame()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (!isGameWon && Input.GetKeyDown(KeyCode.R))
         {
             if (!isGameOver)
             {

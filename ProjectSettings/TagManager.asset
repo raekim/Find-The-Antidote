@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Attackable
   - Walkable
+  - Antidote
   layers:
   - Default
   - TransparentFX

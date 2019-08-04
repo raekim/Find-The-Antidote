@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -8,11 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] int health;
     [SerializeField] int damage = 1;
     [SerializeField] Sprite normalSprite;   // sprite of the character after taking the antidote
+    [SerializeField] Text healthText;
+    [SerializeField] bool isHealthStage;
     CameraMove playerCamera;
 
     private void Start()
     {
         playerCamera = GetComponent<CameraMove>();
+        if(isHealthStage)
+            UpdateHealthText();
     }
 
     // Update is called once per frame
@@ -55,7 +60,7 @@ public class Player : MonoBehaviour
     {
         // get the object that is in the way of the player
         GameObject objectInTheWay = GameManager.Instance.GetGameObjectAt(GameManager.Instance.MakeDictionaryKey(newPosVector.x, newPosVector.y));
-        
+        Debug.Log(objectInTheWay);
         if (objectInTheWay == null)
         {
             // walking into the air
@@ -78,11 +83,19 @@ public class Player : MonoBehaviour
                     Attack(objectInTheWay);
                     break;
                 case "Walkable":
+                case "Antidote":
                     MovePlayerToPosition(newPosVector);
-                    if(objectInTheWay.name == "Antidote")
+                    if(objectInTheWay.tag == "Antidote")
                     {
                         Destroy(objectInTheWay);
-                        GameManager.Instance.WinGame();
+                        if (objectInTheWay.GetComponent<Antidote>().isRealAntidote())
+                        {
+                            GameManager.Instance.WinGame();
+                        }
+                        else
+                        {
+                            GameManager.Instance.GameOver();
+                        }
                     }
                     break;
                 default:                  
@@ -112,7 +125,8 @@ public class Player : MonoBehaviour
     void TakeHit(int damage)
     {
         health -= damage;
-        if(health <= 0)
+        UpdateHealthText();
+        if (health <= 0)
         {
             GameManager.Instance.GameOver();
         }
@@ -132,5 +146,10 @@ public class Player : MonoBehaviour
     private void MovePlayerToPosition(Vector3 newPosVector)
     {
         transform.position = newPosVector;
+    }
+
+    void UpdateHealthText()
+    {
+        healthText.text = "HP : " + health.ToString();
     }
 }
