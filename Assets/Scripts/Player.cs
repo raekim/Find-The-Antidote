@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject PlayerAttackEffect;
     [SerializeField] int health;
     [SerializeField] int damage = 1;
+    [SerializeField] Sprite normalSprite;   // sprite of the character after taking the antidote
     CameraMove playerCamera;
 
     private void Start()
@@ -78,6 +79,11 @@ public class Player : MonoBehaviour
                     break;
                 case "Walkable":
                     MovePlayerToPosition(newPosVector);
+                    if(objectInTheWay.name == "Antidote")
+                    {
+                        Destroy(objectInTheWay);
+                        GameManager.Instance.WinGame();
+                    }
                     break;
                 default:                  
                     break;
@@ -115,6 +121,12 @@ public class Player : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void TakeAntidote()
+    {
+        // go back to normal
+        GetComponent<SpriteRenderer>().sprite = normalSprite;
     }
 
     private void MovePlayerToPosition(Vector3 newPosVector)

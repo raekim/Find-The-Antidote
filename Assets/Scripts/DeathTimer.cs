@@ -7,17 +7,23 @@ public class DeathTimer : MonoBehaviour
 {
     [SerializeField] int secondsToLive = 60;
     [SerializeField] Text timeText;
+    Coroutine deathTimerCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DeathCountDown());
+        deathTimerCoroutine = StartCoroutine(DeathCountDown());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void StopDeathTimer()
+    {
+        StopCoroutine(deathTimerCoroutine);
     }
 
     IEnumerator DeathCountDown()

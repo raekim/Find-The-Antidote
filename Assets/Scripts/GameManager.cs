@@ -72,8 +72,7 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
-        StopAllCoroutines();
-        isGameOver = true;
+        StopGame();
 
         // player dies
         FindObjectOfType<Player>().Die();
@@ -82,11 +81,23 @@ public class GameManager : MonoBehaviour
         restartText.gameObject.SetActive(true);
     }
 
+    private void StopGame()
+    {
+        FindObjectOfType<DeathTimer>().StopDeathTimer();
+        isGameOver = true;
+        FindObjectOfType<Player>().enabled = false;
+    }
+
+    public void WinGame()
+    {
+        StopGame();
+        FindObjectOfType<Player>().TakeAntidote();
+    }
+
     void RestartGame()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("R pressed");
             if (!isGameOver)
             {
                 FindObjectOfType<Player>().Die();
